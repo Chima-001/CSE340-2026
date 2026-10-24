@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
     <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><a href="/projects">Projects</a></li>
+      <div class="nav-wrapper">
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="/" class="nav-logo">
+          <img src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
+          <span>Service Network</span>
+        </a>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/organizations" class="nav-link">Organizations</a></li>
+          <li><a href="/projects" class="nav-link">Projects</a></li>
+          <li><a href="/categories" class="nav-link">Categories</a></li>
         </ul>
+      </div>
+      <div class="nav-overlay" id="nav-overlay"></div>
     </nav>
+    <script>
+      const toggle = document.getElementById('mobile-menu-toggle');
+      const menu = document.getElementById('nav-menu');
+      const overlay = document.getElementById('nav-overlay');
+      const links = document.querySelectorAll('.nav-link');
+
+      function toggleMenu() {
+        const isOpen = menu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        toggle.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', isOpen);
+      }
+
+      toggle.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', toggleMenu);
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('active');
+          overlay.classList.remove('active');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    </script>
+  </body>
+</html>
