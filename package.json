@@ -1,0 +1,28 @@
+{
+  "name": "cse340-2026",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Chima-001/CSE340-2026#readme",
+  "bugs": {
+    "url": "https://github.com/Chima-001/CSE340-2026/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chima-001/CSE340-2026.git"
+  },
+  "license": "ISC",
+  "author": "Chima Nnaji",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^7.0.2",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
