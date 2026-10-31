@@ -2,7 +2,6 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
-import { getAllOrganizations } from './src/models/organizations.js';
 
 // Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -17,9 +16,9 @@ const app = express();
 
 
 /**
-  * Configure Express middleware
-  */
- // Set EJS as the templating engine
+ * Configure Express middleware
+*/
+// Set EJS as the templating engine
 app.set('view engine', 'ejs');
 
 // Tell Express where to find your templates
@@ -30,27 +29,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Routes
- */
+*/
 app.get('/', async (req, res) => {
     const title = 'Home';
     res.render('home', { title });
 });
 
+import { getAllOrganizations } from './src/models/organizations.js';
 app.get('/organizations', async (req, res) => {
     const organizations = await getAllOrganizations();
-    
     const title = 'Our Partner Organizations';
     res.render('organizations', { title, organizations });
 });
 
+import { getAllProjects } from './src/models/projects.js';
 app.get('/projects', async (req, res) => {
-    const title = 'Service Projects';
-    res.render('projects', { title });
+    const projects = await getAllProjects();
+    const title = 'Our Service Projects';
+    res.render('projects', { title, projects });
 });
 
+import { getAllCategories } from './src/models/categories.js';
 app.get('/categories', async (req, res) => {
+    const categories = await getAllCategories();
     const title = 'Service Project Categories';
-    res.render('categories', { title });
+    res.render('categories', { title, categories });
 });
 
 app.listen(PORT, async () => {

@@ -9,18 +9,11 @@
     </p>
   </div>
   <ul>
-    <li class="card">
-      <h3>Environmental</h3>
-    </li>
-    <li class="card">
-      <h3>Educational</h3>
-    </li>
-    <li class="card">
-      <h3>Community Service</h3>
-    </li>
-    <li class="card">
-      <h3>Health and Wellness</h3>
-    </li>
+    <% categories.forEach(category => { %>
+      <li class="card">
+        <h3><%= category.name %></h3>
+      </li>
+    <% }); %>
   </ul>
 </main>
 
