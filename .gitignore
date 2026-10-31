@@ -148,4 +148,5 @@ vite.config.ts.timestamp-*
 # Turbo Repo
 .turbo
 
-*.txt
+# Less relevant to the project
+others/

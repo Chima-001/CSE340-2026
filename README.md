@@ -6,7 +6,6 @@ A CSE 340 course project — a Service Network website built with **Node.js**, *
 
 - [Overview](#overview)
 - [Features](#features)
-- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Available Routes](#available-routes)
@@ -29,37 +28,6 @@ The CSE 340 Service Network is a simple web application that promotes service ac
 - **Responsive Navigation** — Consistent navigation across all pages with links to Home, Organizations, Projects, and Categories
 - **Responsive Design** — Mobile-friendly layout that adapts to tablets and phones
 - **Accessible** — Keyboard navigable, focus indicators, sufficient color contrast, and semantic HTML
-
-## 📁 Project Structure
-
-```
-CSE340-2026/
-├── server.js                 # Express server entry point (ESM modules)
-├── package.json              # Project dependencies and scripts
-├── package-lock.json         # Locked dependency versions
-├── nodemon.json              # Nodemon configuration for development
-├── .env                      # Environment variables (PORT, NODE_ENV) — NOT committed to GitHub
-├── README.md                 # Project documentation
-├── LICENSE                   # MIT License
-├── .gitignore                # Git ignore rules
-├── public/                   # Static assets
-│   ├── css/
-│   │   └── main.css          # Professional responsive stylesheet
-│   └── images/
-│       ├── brightfuture-logo.png
-│       ├── cse340-service-network.png
-│       ├── greenharvest-logo.png
-│       └── unityserve-logo.png
-└── src/
-    └── views/                # EJS templates
-        ├── home.ejs          # Home page
-        ├── organizations.ejs # Partner organizations page
-        ├── projects.ejs      # Service projects page
-        ├── categories.ejs    # Service project categories page
-        └── partials/
-            ├── header.ejs    # Shared header with navigation
-            └── footer.ejs    # Shared footer with copyright
-```
 
 ## 🚀 Installation
 
