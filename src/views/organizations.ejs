@@ -1,22 +1,24 @@
 <%- include('partials/header') %>
 
 <main>
-  <div class="section-header">
-    <h2><%= title %></h2>
-    <p>Here are a few of our partner organizations:</p>
+  <div class="container">
+    <div class="section-header">
+      <h2><%= title %></h2>
+      <p>Here are a few of our partner organizations:</p>
+    </div>
+    <ul>
+      <% organizations.forEach(organization => { %>
+        <li class="card">
+          <img
+            src="/images/<%= organization.logo_filename %>"
+            alt="<%= organization.name %> logo"
+          />
+          <a href="/organization/<%= organization.organization_id %>"><%= organization.name %></a>
+          <p><%= organization.contact_email %></p>
+        </li>
+      <% }); %>
+    </ul>
   </div>
-  <ul>
-    <% organizations.forEach(organization => { %>
-      <li class="card">
-        <img
-          src="/images/<%= organization.logo_filename %>"
-          alt="<%= organization.name %> logo"
-        />
-        <h3><%= organization.name %></h3>
-        <p><%= organization.contact_email %></p>
-      </li>
-    <% }); %>
-  </ul>
 </main>
 
 <%- include('partials/footer') %>

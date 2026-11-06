@@ -1,11 +1,16 @@
 <footer>
   <div class="footer-wrapper">
     <a href="/" class="footer-brand">
-      <img src="images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
+      <img src="/images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
       <span>Service Network</span>
     </a>
     <div class="footer-divider"></div>
-    <p class="footer-text">&copy; <%= new Date().getFullYear() %> CSE 340 Service Network.</p>
+    <p class="footer-text">
+      &copy; <%= new Date().getFullYear() %> CSE 340 Service Network.
+      <% if (NODE_ENV === 'development') { %>
+        (Development mode)
+      <% } %>
+    </p>
   </div>
 </footer>
 </body>
