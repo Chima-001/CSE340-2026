@@ -789,3 +789,65 @@ footer {
     font-size: var(--font-size-md);
   }
 }
+
+/* ===== Categories: tags, links, and card touch-ups ===== */
+
+/* Links inside paragraphs need more than color to stand out */
+main p a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Cards used as list items: no stray bullet markers */
+li.card {
+  list-style: none;
+}
+
+/* Card title links (category and project names) */
+.card h3 a {
+  color: var(--color-primary);
+}
+
+.card h3 a:hover {
+  color: var(--color-primary-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Category tags on the project details page */
+.project-categories {
+  margin-top: var(--spacing-8);
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  list-style: none;
+  margin-bottom: var(--spacing-6);
+}
+
+.category-tag {
+  display: inline-block;
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-primary-dark);
+  border: var(--border-width) solid var(--color-primary-light);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  line-height: var(--line-height-normal);
+  text-decoration: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.category-tag:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.category-tag:focus-visible {
+  outline: 3px solid var(--color-accent-dark);
+  outline-offset: 3px;
+}

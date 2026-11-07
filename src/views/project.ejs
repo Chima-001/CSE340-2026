@@ -13,6 +13,21 @@
             Organization:
             <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
         </p>
+
+        <section class="project-categories" aria-labelledby="categories-heading">
+            <h2 id="categories-heading">Categories</h2>
+            <% if (categories.length === 0) { %>
+                <p>This project has not been assigned to any categories.</p>
+            <% } else { %>
+                <ul class="category-tags">
+                    <% categories.forEach(category => { %>
+                        <li>
+                            <a class="category-tag" href="/category/<%= category.category_id %>"><%= category.name %></a>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </section>
     </div>
 </main>
 <%- include('partials/footer') %>
