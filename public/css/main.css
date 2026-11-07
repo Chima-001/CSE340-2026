@@ -761,3 +761,31 @@ footer {
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
 }
+
+@media (max-width: 768px) {
+  .nav-menu {
+    gap: var(--spacing-2);
+  }
+
+  .nav-link {
+    display: block;
+    padding: var(--spacing-4) var(--spacing-5);
+    font-size: var(--font-size-lg);
+  }
+
+  .nav-link:hover {
+    background-color: rgba(27, 94, 67, 0.1);
+    color: var(--color-primary-dark);
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-menu {
+    gap: var(--spacing-2);
+  }
+
+  .nav-link {
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-md);
+  }
+}
