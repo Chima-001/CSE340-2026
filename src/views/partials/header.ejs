@@ -27,6 +27,14 @@
       </div>
       <div class="nav-overlay" id="nav-overlay"></div>
     </nav>
+
+<% const messages = flash(); %>
+<% Object.keys(messages).forEach(type => { %>
+  <% messages[type].forEach(msg => { %>
+    <div class="alert <%= type %>"><%= msg %></div>
+  <% }); %>
+<% }); %>
+    
     <script>
       const toggle = document.getElementById('mobile-menu-toggle');
       const menu = document.getElementById('nav-menu');

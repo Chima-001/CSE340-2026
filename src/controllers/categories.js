@@ -1,37 +1,93 @@
 // Import any needed model functions
-import { getAllCategories, getCategoryDetails } from '../models/categories.js';
-import { getProjectsByCategoryId } from '../models/projects.js';
+import {
+  getAllCategories,
+  getCategoryDetails,
+  getProjectsByCategoryId,
+  getCategoriesByProjectId,
+  updateCategoryAssignments,
+} from "../models/categories.js";
+import { getProjectDetails } from "../models/projects.js";
 
 // Define any controller functions
 const showCategoriesPage = async (req, res) => {
-    const categories = await getAllCategories();
-    const title = 'Service Categories';
+  const categories = await getAllCategories();
+  const title = "Service Categories";
 
-    res.render('categories', { title, categories });
+  res.render("categories", { title, categories });
 };
 
 const showCategoryDetailsPage = async (req, res, next) => {
-    const categoryId = req.params.id;
+  const categoryId = req.params.id;
 
-    if (!/^\d+$/.test(categoryId)) {
-        const err = new Error('Category not found');
-        err.status = 404;
-        return next(err);
-    }
+  if (!/^\d+$/.test(categoryId)) {
+    const err = new Error("Category not found");
+    err.status = 404;
+    return next(err);
+  }
 
-    const category = await getCategoryDetails(categoryId);
+  const category = await getCategoryDetails(categoryId);
 
-    if (!category) {
-        const err = new Error('Category not found');
-        err.status = 404;
-        return next(err);
-    }
+  if (!category) {
+    const err = new Error("Category not found");
+    err.status = 404;
+    return next(err);
+  }
 
-    const projects = await getProjectsByCategoryId(categoryId);
-    const title = 'Category Details';
+  const projects = await getProjectsByCategoryId(categoryId);
+  const title = "Category Details";
 
-    res.render('category', { title, category, projects });
+  res.render("category", { title, category, projects });
+};
+
+const showAssignCategoriesForm = async (req, res, next) => {
+  const projectId = req.params.projectId;
+
+  if (!/^\d+$/.test(projectId)) {
+    const err = new Error("Project not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  const projectDetails = await getProjectDetails(projectId);
+
+  if (!projectDetails) {
+    const err = new Error("Project not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  const categories = await getAllCategories();
+  const assignedCategories = await getCategoriesByProjectId(projectId);
+  const title = "Assign Categories to Project";
+
+  res.render("assign-categories", {
+    title,
+    projectId,
+    projectDetails,
+    categories,
+    assignedCategories,
+  });
+};
+
+const processAssignCategoriesForm = async (req, res) => {
+  const projectId = req.params.projectId;
+  const selectedCategoryIds = req.body.categoryIds || [];
+
+  // One checked box arrives as a string, several arrive as an array
+  const categoryIdsArray = Array.isArray(selectedCategoryIds)
+    ? selectedCategoryIds
+    : [selectedCategoryIds];
+
+  await updateCategoryAssignments(projectId, categoryIdsArray);
+
+  req.flash("success", "Categories updated successfully.");
+  res.redirect(`/project/${projectId}`);
 };
 
 // Export any controller functions
-export { showCategoriesPage, showCategoryDetailsPage };
+export {
+  showCategoriesPage,
+  showCategoryDetailsPage,
+  showAssignCategoriesForm,
+  processAssignCategoriesForm,
+};

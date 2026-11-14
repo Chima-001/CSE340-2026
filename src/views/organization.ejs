@@ -8,6 +8,9 @@
 
         <p>Description: <%= organizationDetails.description %></p>
 
+        <div class="page-actions">
+            <a href="/edit-organization/<%= organizationDetails.organization_id %>" class="btn btn-accent">Edit Organization</a>
+        </div>
         <h3>Service Projects</h3>
         <ul class="project-list">
             <% projects.forEach(project => { %>
