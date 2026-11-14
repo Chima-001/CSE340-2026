@@ -1072,3 +1072,9 @@ main:has(.form-card) h1 {
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-5);
 }
+
+.page-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
