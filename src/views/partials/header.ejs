@@ -18,12 +18,18 @@
           <img src="/images/cse340-service-network.png" alt="CSE 340 Service Network Logo">
           <span>Service Network</span>
         </a>
-        <ul class="nav-menu" id="nav-menu">
-          <li><a href="/" class="nav-link">Home</a></li>
-          <li><a href="/organizations" class="nav-link">Organizations</a></li>
-          <li><a href="/projects" class="nav-link">Projects</a></li>
-          <li><a href="/categories" class="nav-link">Categories</a></li>
-        </ul>
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/organizations" class="nav-link">Organizations</a></li>
+            <li><a href="/projects" class="nav-link">Projects</a></li>
+            <li><a href="/categories" class="nav-link">Categories</a></li>
+            <% if (isLoggedIn) { %>
+              <li><a href="/logout" class="nav-link">Logout</a></li>
+            <% } else { %>
+              <li><a href="/register" class="nav-link">Register</a></li>
+              <li><a href="/login" class="nav-link">Login</a></li>
+            <% } %>
+          </ul>
       </div>
       <div class="nav-overlay" id="nav-overlay"></div>
     </nav>
@@ -31,7 +37,7 @@
 <% const messages = flash(); %>
 <% Object.keys(messages).forEach(type => { %>
   <% messages[type].forEach(msg => { %>
-    <div class="alert <%= type %>"><%= msg %></div>
+    <div class="alert <%= type %>" role="alert"><%= msg %></div>
   <% }); %>
 <% }); %>
     

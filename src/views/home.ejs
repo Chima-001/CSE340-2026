@@ -1,5 +1,6 @@
 <%- include('partials/header') %>
 
+
 <main>
   <div class="hero">
     <div class="hero-content">
@@ -17,8 +18,15 @@
           alt="CSE 340 Service Network Logo"
         />
       </div>
+
+      <% if (isLoggedIn) { %>
+        <div class="page-actions text-center">
+          <a href="/dashboard" class="btn btn-accent btn-lg">My Dashboard</a>
+        </div>
+      <% } %>
     </div>
   </div>
 </main>
+
 
 <%- include('partials/footer') %>
