@@ -7,7 +7,14 @@
     <div class="form-card">
       <p><strong>Name:</strong> <%= name %></p>
       <p><strong>Email:</strong> <%= email %></p>
+      <p><strong>Role:</strong> <%= user.role_name %></p>
     </div>
+
+    <% if (user && user.role_name === 'admin') { %>
+      <div class="page-actions text-center">
+        <a href="/users" class="btn btn-primary">View All Users</a>
+      </div>
+    <% } %>
   </div>
 </main>
 

@@ -1120,3 +1120,64 @@ main:has(.form-card) h1 {
 main:has(.hero) {
   padding: 0;
 }
+
+/* ===== Users table ===== */
+.section-header h1 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-4);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: var(--spacing-8);
+  background-color: var(--color-bg-card);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--spacing-4) var(--spacing-5);
+  text-align: left;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.data-table th {
+  background-color: var(--color-bg-elevated);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--color-bg-elevated);
+}
+
+.role-badge {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-3);
+  border: var(--border-width) solid var(--color-border-hover);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-light);
+  background-color: var(--color-bg-elevated);
+}
+
+.role-badge.role-admin {
+  color: var(--color-primary-dark);
+  background-color: var(--color-accent-light);
+  border-color: var(--color-accent);
+}

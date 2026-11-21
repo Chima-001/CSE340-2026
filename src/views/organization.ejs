@@ -2,15 +2,14 @@
 <main>
     <div class="container">
         <h1><%= title %></h1>
-
         <h2><%= organizationDetails.name %></h2>
         <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
-
         <p>Description: <%= organizationDetails.description %></p>
-
-        <div class="page-actions">
-            <a href="/edit-organization/<%= organizationDetails.organization_id %>" class="btn btn-accent">Edit Organization</a>
-        </div>
+        <% if (user && user.role_name === 'admin') { %>
+            <div class="page-actions">
+                <a href="/edit-organization/<%= organizationDetails.organization_id %>" class="btn btn-accent">Edit Organization</a>
+            </div>
+        <% } %>
         <h3>Service Projects</h3>
         <ul class="project-list">
             <% projects.forEach(project => { %>

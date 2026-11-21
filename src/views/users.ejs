@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+<main>
+  <div class="container">
+    <div class="section-header">
+      <h1><%= title %></h1>
+      <p>Everyone registered in the system and their role.</p>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email (Username)</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(account => { %>
+            <tr>
+              <td><%= account.name %></td>
+              <td><%= account.email %></td>
+              <td>
+                <span class="role-badge <%= account.role_name === 'admin' ? 'role-admin' : '' %>">
+                  <%= account.role_name %>
+                </span>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="page-actions text-center">
+      <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
