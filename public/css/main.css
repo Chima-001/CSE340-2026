@@ -1181,3 +1181,60 @@ main:has(.hero) {
   background-color: var(--color-accent-light);
   border-color: var(--color-accent);
 }
+
+/* ===== Volunteer feature ===== */
+.volunteer-section {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+}
+
+.volunteer-status {
+  display: inline-block;
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-accent-light);
+  color: var(--color-primary-dark);
+  border: var(--border-width) solid var(--color-accent);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.inline-form {
+  display: inline-block;
+}
+
+.volunteer-list {
+  list-style: none;
+}
+
+.volunteer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+}
+
+.volunteer-item p {
+  margin-bottom: var(--spacing-1);
+}
+
+/* Remove / destructive action */
+.btn-danger {
+  background-color: #b3261e;
+  color: var(--color-white);
+  border-color: #b3261e;
+}
+
+.btn-danger:hover {
+  background-color: #8c1d18;
+  border-color: #8c1d18;
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .volunteer-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

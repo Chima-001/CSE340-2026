@@ -1,10 +1,14 @@
 -- ========================================
 -- Reset (drop in reverse dependency order)
 -- ========================================
+DROP TABLE IF EXISTS project_volunteer;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS project_category;
 DROP TABLE IF EXISTS service_project;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS organization;
+
 
 -- ========================================
 -- Organization Table
@@ -17,6 +21,7 @@ CREATE TABLE organization (
     logo_filename VARCHAR(255) NOT NULL
 );
 
+
 -- ========================================
 -- Insert sample data: Organizations
 -- ========================================
@@ -25,6 +30,7 @@ VALUES
 ('BrightFuture Builders', 'A nonprofit focused on improving community infrastructure through sustainable construction projects.', 'info@brightfuturebuilders.org', 'brightfuture-logo.png'),
 ('GreenHarvest Growers', 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
 ('UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'unityserve-logo.png');
+
 
 -- ========================================
 -- Service Project Table
@@ -37,6 +43,7 @@ CREATE TABLE service_project (
     location VARCHAR(255) NOT NULL,
     project_date DATE NOT NULL
 );
+
 
 -- ========================================
 -- Insert sample data: Service Projects
@@ -72,6 +79,7 @@ CREATE TABLE category (
     name VARCHAR(100) NOT NULL
 );
 
+
 -- ========================================
 -- Insert sample data: Categories
 -- ========================================
@@ -91,6 +99,7 @@ CREATE TABLE project_category (
     category_id INTEGER NOT NULL REFERENCES category(category_id),
     PRIMARY KEY (project_id, category_id)
 );
+
 
 -- ========================================
 -- Insert sample data: Project_Category associations
@@ -120,6 +129,7 @@ VALUES
 (14, 4), -- Volunteer Appreciation Cleanup -> Environment
 (15, 5); -- Holiday Gift Drive -> Community Outreach
 
+
 -- ========================================
 -- Admin Roles Table
 -- ========================================
@@ -129,13 +139,15 @@ CREATE TABLE roles (
     role_description TEXT
 );
 
+
 INSERT INTO roles (role_name, role_description) VALUES 
     ('user', 'Standard user with basic access'),
     ('admin', 'Administrator with full system access');
 
--- Verify the data was inserted
-SELECT * FROM roles;
 
+-- ========================================
+-- Users Table
+-- ========================================
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -145,14 +157,13 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert a test user
-INSERT INTO users (name, email, password_hash, role_id) 
-VALUES ('testuser', 'test@example.com', 'placeholder_hash', 1);
 
--- Join users and roles to see complete information
-SELECT u.user_id, u.name, u.email, r.role_name, r.role_description
-FROM users u
-JOIN roles r ON u.role_id = r.role_id;
-
--- Delete the test user
-DELETE FROM users WHERE email = 'test@example.com';
+-- ========================================
+-- Project_Volunteer Junction Table (Many-to-Many)
+-- ========================================
+CREATE TABLE project_volunteer (
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    project_id INTEGER NOT NULL REFERENCES service_project(project_id) ON DELETE CASCADE,
+    volunteered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, project_id)
+);

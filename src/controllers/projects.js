@@ -6,6 +6,7 @@ import {
   updateProject,
 } from "../models/projects.js";
 import { getCategoriesByProjectId } from "../models/categories.js";
+import { isUserVolunteering } from "../models/volunteers.js";
 import { body, validationResult } from "express-validator";
 import { getAllOrganizations } from "../models/organizations.js";
 
@@ -53,13 +54,16 @@ const showProjectsPage = async (req, res) => {
 const showProjectDetailsPage = async (req, res, next) => {
   const projectId = req.params.id;
 
+
   if (!/^\d+$/.test(projectId)) {
     const err = new Error("Project not found");
     err.status = 404;
     return next(err);
   }
 
+
   const project = await getProjectDetails(projectId);
+
 
   if (!project) {
     const err = new Error("Project not found");
@@ -67,10 +71,19 @@ const showProjectDetailsPage = async (req, res, next) => {
     return next(err);
   }
 
+
   const categories = await getCategoriesByProjectId(projectId);
+
+  // Only check volunteer status when someone is logged in
+  let isVolunteering = false;
+  if (req.session && req.session.user) {
+    isVolunteering = await isUserVolunteering(req.session.user.user_id, projectId);
+  }
+
   const title = "Project Details";
 
-  res.render("project", { title, project, categories });
+
+  res.render("project", { title, project, categories, isVolunteering });
 };
 
 const showNewProjectForm = async (req, res) => {

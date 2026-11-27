@@ -26,6 +26,24 @@
                 </ul>
             <% } %>
         </section>
+
+        <% const volunteering = typeof isVolunteering !== 'undefined' && isVolunteering; %>
+        <% if (isLoggedIn) { %>
+            <section class="volunteer-section" aria-labelledby="volunteer-heading">
+                <h2 id="volunteer-heading">Volunteer</h2>
+                <% if (volunteering) { %>
+                    <p class="volunteer-status">You are volunteering for this project.</p>
+                    <form action="/unvolunteer/<%= project.project_id %>" method="POST" class="inline-form">
+                        <button type="submit" class="btn btn-secondary">Remove Me as a Volunteer</button>
+                    </form>
+                <% } else { %>
+                    <form action="/volunteer/<%= project.project_id %>" method="POST" class="inline-form">
+                        <button type="submit" class="btn btn-primary">Volunteer for This Project</button>
+                    </form>
+                <% } %>
+            </section>
+        <% } %>
+
         <% if (user && user.role_name === 'admin') { %>
             <div class="page-actions page-actions-row">
                 <a href="/edit-project/<%= project.project_id %>" class="btn btn-accent">Edit Project</a>
